@@ -1,0 +1,26 @@
+:root { --bg: #05070d; --panel: #0c1222; --text: #dce8f2; --muted: #8fa3b8; --accent: #d9ff3d; --line: #1c2940; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+header, main, footer { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+header { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; padding-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+.brand { font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+.brand span { color: var(--accent); }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+nav a:hover { color: var(--text); }
+h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.1; margin: 32px 0 12px; }
+h2 { font-size: 1.3rem; margin: 40px 0 10px; }
+p, li { color: var(--text); }
+.lead { color: var(--muted); font-size: 1.15rem; max-width: 640px; }
+.card { display: grid; grid-template-columns: 1fr; gap: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin: 28px 0; }
+@media (min-width: 720px) { .card { grid-template-columns: 1.2fr 1fr; align-items: center; } }
+.card img.shot { width: 100%; height: auto; border-radius: 10px; display: block; }
+.card h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; font-size: 1.4rem; }
+.card h3 img { width: 44px; height: 44px; border-radius: 10px; }
+.btn { display: inline-block; background: var(--accent); color: #0a0d14; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; margin-top: 8px; }
+.muted { color: var(--muted); }
+a { color: var(--accent); }
+footer { border-top: 1px solid var(--line); margin-top: 56px; padding-top: 20px; padding-bottom: 40px; color: var(--muted); font-size: 0.9rem; }
+footer a { color: var(--muted); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); }
