@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>GPS, Angle and Acro: flight modes explained · Cowork Game Studio</title>
+    <meta name="description" content="What the GPS, Angle and Acro flight modes in Drone Sim do, how they feel, when to use each one, and a practice plan for moving from GPS to Acro." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/gps-angle-acro-flight-modes-explained/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="GPS, Angle and Acro: flight modes explained · Cowork Game Studio" />
+    <meta property="og:description" content="What the GPS, Angle and Acro flight modes in Drone Sim do, how they feel, when to use each one, and a practice plan for moving from GPS to Acro." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/gps-angle-acro-flight-modes-explained/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/fpv-800.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "GPS, Angle and Acro: flight modes explained", "description": "What the GPS, Angle and Acro flight modes in Drone Sim do, how they feel, when to use each one, and a practice plan for moving from GPS to Acro.", "datePublished": "2026-10-11", "image": "https://coworkgamestudio.com/img/fpv-800.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/gps-angle-acro-flight-modes-explained/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Guide</p>
+          <h1>GPS, Angle and Acro: flight modes explained</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-10-11">11 October 2026</time> · Drone Sim</p>
+          <figure><img src="/img/fpv-800.jpg" width="800" height="450" alt="FPV goggles view: the quad passes under a cyan ring in the brick Night Loft, with numbered magenta and cyan rings ahead" fetchpriority="high" /></figure>
+
+          <p>A flight mode decides how much the flight controller helps you. Real FPV quads run flight controller software that can either level the drone for you or leave every angle to the pilot. Drone Sim has three modes, from the most help to none: <strong>GPS</strong>, <strong>Angle</strong> and <strong>Acro</strong>. You switch between them at any time with <kbd>M</kbd> on a keyboard, <kbd>Y</kbd> on a gamepad, the MODE button on touch, or <kbd>B</kbd> on a Meta Quest Touch controller. The current mode is always shown on the HUD.</p>
+
+          <h2>GPS: the drone flies itself when you let go</h2>
+          <p>In GPS mode the quad holds its height and position. Tilt the right stick and it flies in that direction; let go and it levels out and brakes to a stop. On controls that spring back to centre (the keyboard, Quest thumbsticks, a gamepad stick, or touch with throttle auto-centre turned on), the throttle works as a climb rate: centre holds the current altitude, up climbs, down descends.</p>
+          <p>GPS is named after the position hold that camera drones use. It is the best mode for your first flights, for exploring big open levels like Alpine Valley or Infinite World, and for lining up the camera to look at the scenery. Its weakness is speed: because the controller keeps braking and levelling, you cannot carry momentum through a turn the way a racer does.</p>
+
+          <h2>Angle: self-levelling, but the throttle is yours</h2>
+          <p>Angle mode still levels the quad when you centre the pitch and roll stick, and it limits how far the drone can tilt. The maximum tilt is 55 degrees by default and can be set from 20 to 80 degrees in the rate settings. What Angle does not do is hold your height. The throttle is raw: it stays where you leave it, and the quad climbs or sinks depending on how much power you give it.</p>
+          <p>The thing that surprises most new pilots is that <strong>tilting loses height</strong>. When the quad tilts forwards, part of the motors' push goes into moving forwards instead of holding the drone up, so you must add throttle in a fast forward run or the quad will sink into the ground. Learning to work the throttle together with pitch is the main skill Angle teaches. On a keyboard, where you cannot hold a key half way, <kbd>X</kbd> snaps the throttle to the estimated hover point.</p>
+          <p>Angle is a good mode for racing on the smaller courses. The Novice, Rookie and Pilot AI opponents all fly in Angle mode.</p>
+
+          <h2>Acro: the way real FPV pilots fly</h2>
+          <p>In Acro (also called rate mode) there is no self-levelling at all. The pitch and roll stick no longer sets an angle; it sets a <em>rotation speed</em>. Hold the stick and the quad keeps rotating; centre it and the quad holds whatever attitude it is in, even upside down. To fly level you have to bring it back to level yourself.</p>
+          <p>That sounds harder, and at first it is. But it is also why racing and freestyle pilots use it: nothing fights your inputs, there is no tilt limit, and you can carry speed through turns, dive under obstacles and flip or roll whenever you like. The two top AI opponents, Ace and Pro, fly in Acro. How fast the quad rotates for a given stick movement is set by your rates; see <a href="/devlog/rates-and-expo-explained/">Rates and expo explained</a>.</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Mode</th><th>Self-levels</th><th>Holds height</th><th>Tilt limit</th><th>Best for</th></tr></thead>
+              <tbody>
+                <tr><td>GPS</td><td>Yes, and brakes</td><td>Yes</td><td>Yes</td><td>First flights, exploring</td></tr>
+                <tr><td>Angle</td><td>Yes</td><td>No (raw throttle)</td><td>Yes (55° default)</td><td>Learning throttle, early racing</td></tr>
+                <tr><td>Acro</td><td>No</td><td>No (raw throttle)</td><td>None</td><td>Racing, freestyle, real-quad practice</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>A practice plan from GPS to Acro</h2>
+          <ol>
+            <li><strong>GPS on the Training Field.</strong> Hover, turn, fly the three rings. Use the chase camera.</li>
+            <li><strong>Angle on the Training Field.</strong> Take off and hold a hover using only the throttle. Then fly slow laps, adding throttle every time you tilt forward.</li>
+            <li><strong>Angle in Toy Town or the Night Loft.</strong> Race the Novice and then the Rookie opponents. Switch to the FPV camera.</li>
+            <li><strong>Acro in the open.</strong> Go back to a big, empty space. Climb high first, so you have time to recover. Practise rolling to a bank, holding it, and rolling back to level. If the quad gets away from you, switch to GPS with one button press, let it level, and switch back.</li>
+            <li><strong>Acro on a course.</strong> Fly the Training Field rings in Acro, then a Sprint route in the City or Alpine Valley.</li>
+          </ol>
+          <p>Expect the switch to Acro to take a few sessions. Most pilots find that once it clicks, they never want to go back.</p>
+
+          <div class="note"><p>Have a question about this guide or found something that does not match the game? Write to us at <a href="mailto:cowork.ceo@gmail.com">cowork.ceo@gmail.com</a>.</p></div>
+          <h2>More from the devlog</h2>
+          <ul>
+            <li><a href="/devlog/getting-started-with-fpv-in-drone-sim/">Getting started with FPV in Drone Sim</a></li><li><a href="/devlog/rates-and-expo-explained/">Rates and expo explained: tuning Drone Sim's sticks</a></li>
+          </ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED (Công ty TNHH Cowork), an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Apartment L4-02.OT11 (L4-2.12), 2nd Floor, Tower L4, Vinhomes Central Park, 720A Dien Bien Phu, Thanh My Tay Ward, Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:cowork.ceo@gmail.com">cowork.ceo@gmail.com</a><br />
+              Phone: <a href="tel:+84985718113">+84 985 718 113</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li>Tax code 0319684925</li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED (Công ty TNHH Cowork). All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>

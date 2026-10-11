@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Rates and expo explained: tuning Drone Sim's sticks · Cowork Game Studio</title>
+    <meta name="description" content="How Betaflight-style Actual rates work in Drone Sim: center sensitivity, max rate and expo, the Beginner, Intermediate and Pro presets, and the throttle curve settings." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/rates-and-expo-explained/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Rates and expo explained: tuning Drone Sim's sticks · Cowork Game Studio" />
+    <meta property="og:description" content="How Betaflight-style Actual rates work in Drone Sim: center sensitivity, max rate and expo, the Beginner, Intermediate and Pro presets, and the throttle curve settings." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/rates-and-expo-explained/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/los-800.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Rates and expo explained: tuning Drone Sim's sticks", "description": "How Betaflight-style Actual rates work in Drone Sim: center sensitivity, max rate and expo, the Beginner, Intermediate and Pro presets, and the throttle curve settings.", "datePublished": "2026-10-11", "image": "https://coworkgamestudio.com/img/los-800.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/rates-and-expo-explained/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Guide</p>
+          <h1>Rates and expo explained: tuning Drone Sim's sticks</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-10-11">11 October 2026</time> · Drone Sim</p>
+          <figure><img src="/img/los-800.jpg" width="800" height="368" alt="Line-of-sight view: the quad flies between glowing cyan and magenta race rings in a brick loft, touch sticks on screen" fetchpriority="high" /></figure>
+
+          <p>"Rates" decide how fast a quad rotates for a given stick movement. They matter most in Acro mode, where the stick sets a rotation speed rather than an angle, and they are one of the first things experienced FPV pilots change on a new quad. Drone Sim uses the same model as Betaflight's <strong>Actual</strong> rates, so what you learn here carries over to a real flight controller. You find them under <strong>Settings → Rates &amp; sensitivity</strong>, with a live curve for each axis.</p>
+
+          <h2>The three numbers</h2>
+          <p>Each axis (roll, pitch and yaw) has three values:</p>
+          <ul>
+            <li><strong>Center sensitivity</strong>, in degrees per second: how fast the quad rotates for small stick movements around the centre. Low values make the quad calm and precise near centre.</li>
+            <li><strong>Max rate</strong>, in degrees per second: how fast it rotates with the stick pushed all the way. 400 °/s means a full flip takes under a second; 670 °/s is a typical freestyle setting.</li>
+            <li><strong>Expo</strong>, from 0 to 1: how the curve gets from one to the other. More expo keeps the centre soft for longer and saves the speed for the last part of the stick travel.</li>
+          </ul>
+          <p>The useful idea is that the centre of the stick is for <em>precision</em> (lining up a gate, holding a line) and the end of the stick is for <em>big moves</em> (a hard turn, a flip). Good rates give you both without one getting in the way of the other.</p>
+          <p>Roll and pitch rates apply in Acro. In GPS and Angle the quad self-levels and the right stick sets a tilt angle up to the max tilt instead. The yaw rate applies in all three modes.</p>
+
+          <h2>The presets</h2>
+          <p>Drone Sim ships with three presets, and an <strong>Auto</strong> setting that picks Beginner when you fly with touch or the keyboard and Intermediate when you use a gamepad or transmitter. Thumbs on glass and keys that are either on or off need a softer centre than a proper analogue stick.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Preset</th><th>Center (°/s)</th><th>Max rate (°/s)</th><th>Expo</th><th>At 30 % stick</th></tr></thead>
+              <tbody>
+                <tr><td>Beginner</td><td>50</td><td>400</td><td>0.50</td><td>about 31 °/s</td></tr>
+                <tr><td>Intermediate</td><td>120</td><td>560</td><td>0.45</td><td>about 58 °/s</td></tr>
+                <tr><td>Pro</td><td>200</td><td>670</td><td>0.54</td><td>about 80 °/s</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>For comparison, Betaflight's own default Actual rates (center 70, max 670, expo 0) give about 75 °/s at 30 % stick. The Pro preset is close to a classic freestyle setup. Beginner still allows a full-stick flip, at 400 °/s, but stays very gentle near centre.</p>
+          <p>Edit any value and the preset becomes <strong>Custom</strong>, so your own numbers are kept. There is also an option to link roll and pitch so they change together, which is how most pilots run them.</p>
+
+          <h2>How to tune your own rates</h2>
+          <ol>
+            <li><strong>Start from a preset</strong> that matches your controller, and fly a few laps in Acro.</li>
+            <li><strong>Twitchy in a straight line?</strong> Lower the center sensitivity, or raise expo a little.</li>
+            <li><strong>Can't turn tight enough, or flips feel slow?</strong> Raise the max rate.</li>
+            <li><strong>Change one value at a time</strong>, by a small step, and fly the same course again. Your best time and split times per ring tell you whether the change helped.</li>
+          </ol>
+          <p>There is no single correct setting. Racers often use lower rates for smooth lines; freestyle pilots tend to use higher max rates for fast flips. What matters is that the quad does what you expect it to.</p>
+
+          <h2>The throttle curve</h2>
+          <p>The same screen has the throttle settings, which matter in Angle and Acro where the throttle is raw:</p>
+          <ul>
+            <li><strong>Mid</strong> is the output at the centre of the throttle stick. On Auto it is set to the hover point.</li>
+            <li><strong>Throttle expo</strong> flattens the curve around mid, giving you finer control near hover.</li>
+            <li><strong>Throttle limit</strong> caps the output at full stick, while centre stick still hovers. Useful if full power feels too wild.</li>
+            <li><strong>Raw throttle expo</strong> shapes the throttle in Angle and Acro around the hover point.</li>
+          </ul>
+          <p>Gamepad pilots can also choose whether the throttle is on a stick or on the right trigger, and set the stick deadzone in the controller setup.</p>
+
+          <h2>From the sim to a real quad</h2>
+          <p>Because the model is the same, you can copy your Drone Sim numbers into Betaflight's Actual rates and the stick feel will be close. A real quad also depends on its weight, motors and tune, so treat the sim numbers as a starting point and adjust from there.</p>
+
+          <div class="note"><p>Have a question about this guide or found something that does not match the game? Write to us at <a href="mailto:cowork.ceo@gmail.com">cowork.ceo@gmail.com</a>.</p></div>
+          <h2>More from the devlog</h2>
+          <ul>
+            <li><a href="/devlog/getting-started-with-fpv-in-drone-sim/">Getting started with FPV in Drone Sim</a></li><li><a href="/devlog/gps-angle-acro-flight-modes-explained/">GPS, Angle and Acro: flight modes explained</a></li>
+          </ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED (Công ty TNHH Cowork), an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Apartment L4-02.OT11 (L4-2.12), 2nd Floor, Tower L4, Vinhomes Central Park, 720A Dien Bien Phu, Thanh My Tay Ward, Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:cowork.ceo@gmail.com">cowork.ceo@gmail.com</a><br />
+              Phone: <a href="tel:+84985718113">+84 985 718 113</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li>Tax code 0319684925</li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED (Công ty TNHH Cowork). All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
