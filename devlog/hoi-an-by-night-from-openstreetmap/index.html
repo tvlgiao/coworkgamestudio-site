@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Hoi An by Night: a real old town from OpenStreetMap · Cowork Game Studio</title>
+    <meta name="description" content="How Drone Sim&#x27;s Hoi An course was built: real street plans from OpenStreetMap, shophouses generated in code, about a thousand lanterns lit without a thousand lights, and river reflections that run on phones and Meta Quest." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/hoi-an-by-night-from-openstreetmap/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Hoi An by Night: a real old town from OpenStreetMap · Cowork Game Studio" />
+    <meta property="og:description" content="How Drone Sim&#x27;s Hoi An course was built: real street plans from OpenStreetMap, shophouses generated in code, about a thousand lanterns lit without a thousand lights, and river reflections that run on phones and Meta Quest." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/hoi-an-by-night-from-openstreetmap/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/hoi-an-night-1200.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Hoi An by Night: a real old town from OpenStreetMap", "description": "How Drone Sim's Hoi An course was built: real street plans from OpenStreetMap, shophouses generated in code, about a thousand lanterns lit without a thousand lights, and river reflections that run on phones and Meta Quest.", "datePublished": "2026-10-29", "image": "https://coworkgamestudio.com/img/hoi-an-night-1200.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/hoi-an-by-night-from-openstreetmap/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Hoi An by Night: a real old town from OpenStreetMap</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-10-29">29 October 2026</time> · Drone Sim</p>
+          <figure><img src="/img/hoi-an-night-1200.jpg" width="1200" height="675" alt="Hoi An by Night: colourful lanterns reflected in the river as the quad races towards a ring" fetchpriority="high" /></figure>
+          <p>Hoi An's old town, on the central coast of Viet Nam, is famous for its yellow shophouses, its covered bridge and, above all, its lanterns. At night thousands of them hang across the streets and are reflected in the river. It is a beautiful place to walk, and, as we found, a beautiful place to race a drone through at night.</p>
+          <p>Building it for Drone Sim meant solving three problems: getting the streets right, filling them with houses, and lighting the whole town with lanterns on hardware as modest as a phone or a standalone VR headset.</p>
+
+          <h2>Real streets from OpenStreetMap</h2>
+          <p>We wanted the town to feel like Hoi An, not like a generic "Asian town", so the plan comes from OpenStreetMap, the free, community-made map of the world, published under the Open Database License. We downloaded the old town's data and wrote small tools that extract what a race course needs: the centre lines of the main streets such as Trần Phú, Nguyễn Thái Học and Bạch Đằng, the river banks, the covered Japanese bridge (Chùa Cầu) and the An Hội bridge.</p>
+          <p>Those features keep their real positions. The streets themselves are widened to 11–12 metres, about 1.2 times their real width, because a racing drone needs a little more room than a pedestrian. After all the adjustments, roofs cover 49% of the land north of the river, compared with 48% in the map data, so the town keeps its real density. The import is fully reproducible: run the tools again and you get the same town, byte for byte.</p>
+
+          <h2>Shophouses built in code</h2>
+          <p>We use free CC0 asset kits for some courses, such as Toy Town, but no kit had Vietnamese shophouses. So every house in Hoi An is generated in code. Each one starts as a simple box; a shader paints the walls, doors, shutters and balconies, and the gable roofs are built as real geometry, with a more detailed roof close to the drone and a very simple one far away. Around 400 houses line the streets this way, all drawn in a handful of batches.</p>
+
+          <h2>About a thousand lanterns, without a thousand lights</h2>
+          <p>The lanterns are the heart of the course, and the biggest technical challenge. The town has around a thousand of them. A real light for each lantern is out of the question: even a fast graphics card struggles with more than a few dozen lights, and a VR headset with far fewer.</p>
+          <p>Instead, the glow of every lantern is calculated once, when the course loads, and stored in a single light texture laid over the town, with each texel covering about 64 centimetres. The walls and paving read that texture, so the light from every lantern falls on the street around it at almost no cost. On top of that, a small pool of real lights follows the drone, attached to the lantern strings nearest to it, so you still see moving light and shadow as you fly past: seven on the best quality settings, down to one on the lowest.</p>
+          <p>The lanterns themselves are a single shape drawn many times in one batch, with fewer triangles on lower quality settings. The glow around them comes from a bloom effect on capable devices and from simple halo images on lower settings and in VR. The lanterns and their strings have no collision, so you can fly straight through them, a small mercy given how many there are.</p>
+
+          <h2>A river full of reflections</h2>
+          <p>The river is where Hoi An is at its most beautiful at night, and where a naive approach would be most expensive. A true mirror reflection would draw the whole town a second time every frame. Instead, the lantern reflections are drawn as soft vertical streaks of light on the water, the way reflections look on a gently moving river, all in one draw call. Hundreds of streaks fade out with distance, and floating flower candles and sampans with painted eyes on their bows complete the scene.</p>
+          <p>Like Ha Long Bay, the river is part of the challenge: touch the water and your run ends. The race line runs low over the river and through the covered bridge, so it pays to know where it is.</p>
+
+          <h2>Night lighting</h2>
+          <p>The rest of the scene is lit like a clear night: a dark blue sky with stars and a moon, a dim blue moonlight in place of the sun, and warm, low fog that softens the far end of the streets. The contrast between the cool sky and the warm lantern light is what makes the town read as Hoi An at night, even at a glance.</p>
+
+          <h2>Within budget on every device</h2>
+          <p>Measured at the busiest points of the course, Hoi An stays within our per-frame budgets on every device class:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Device class</th><th>Budget (draws / triangles)</th><th>Hoi An, peak measured</th></tr></thead>
+              <tbody>
+                <tr><td>Desktop, high quality</td><td>150 / 600,000</td><td>up to 80 / 327,000</td></tr>
+                <tr><td>iPhone, medium quality</td><td>110 / 250,000</td><td>up to 51 / 129,000</td></tr>
+                <tr><td>Meta Quest, both eyes</td><td>80 / 120,000</td><td>up to 66 / 115,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Credit where it is due</h2>
+          <p>Hoi An by Night would not exist without the people who map the world on OpenStreetMap. The street plan is © OpenStreetMap contributors, used under the Open Database License, and credited in the game's licence notices.</p>
+          <p>Fly it yourself: open <a href="https://dronesim.coworkgamestudio.com/play/">Drone Sim</a> in your browser and choose Hoi An by Night. The <a href="/games/drone-sim/courses/">course guide</a> has tips for the narrow streets.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/building-ha-long-bay-in-code/">Building Ha Long Bay in code</a></li><li><a href="/games/drone-sim/courses/">Course guide: every track in Drone Sim</a></li><li><a href="/devlog/racing-online-rooms-ghosts-and-leaderboards/">Racing online: rooms, ghosts and leaderboards</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED (Công ty TNHH Cowork), an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Apartment L4-02.OT11 (L4-2.12), 2nd Floor, Tower L4, Vinhomes Central Park, 720A Dien Bien Phu, Thanh My Tay Ward, Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a><br />
+              Phone: <a href="tel:+84985718113">+84 985 718 113</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li>Tax code 0319684925</li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED (Công ty TNHH Cowork). All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>

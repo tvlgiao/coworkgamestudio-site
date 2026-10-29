@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Racing online: rooms, ghosts and leaderboards · Cowork Game Studio</title>
+    <meta name="description" content="How Drone Sim&#x27;s online racing works: live rooms for up to eight pilots, bots that every player flies locally, ghost replays of real pilots, leaderboards per course and controller, and how race times are kept honest." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/racing-online-rooms-ghosts-and-leaderboards/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Racing online: rooms, ghosts and leaderboards · Cowork Game Studio" />
+    <meta property="og:description" content="How Drone Sim&#x27;s online racing works: live rooms for up to eight pilots, bots that every player flies locally, ghost replays of real pilots, leaderboards per course and controller, and how race times are kept honest." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/racing-online-rooms-ghosts-and-leaderboards/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/online-1200.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Racing online: rooms, ghosts and leaderboards", "description": "How Drone Sim's online racing works: live rooms for up to eight pilots, bots that every player flies locally, ghost replays of real pilots, leaderboards per course and controller, and how race times are kept honest.", "datePublished": "2026-10-29", "image": "https://coworkgamestudio.com/img/online-1200.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/racing-online-rooms-ghosts-and-leaderboards/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Racing online: rooms, ghosts and leaderboards</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-10-29">29 October 2026</time> · Drone Sim</p>
+          <figure><img src="/img/online-1200.jpg" width="1200" height="675" alt="Drone Sim&#x27;s Online screen: a grid of courses with Ha Long Bay selected, Quick match and Create room buttons and a room code field" fetchpriority="high" /></figure>
+          <p>Flying a drone simulator alone is good practice. Racing other people is what keeps you coming back. When we added online racing to Drone Sim, we set ourselves three goals: a race should start in seconds, it should work on a phone connection as well as on fibre, and nobody should need an account. This article describes how we got there.</p>
+
+          <h2>Three ways to race online</h2>
+          <ul>
+            <li><strong>Quick match</strong> puts you in a race on the course you chose straight away. The room already has opponents, so you never wait in an empty lobby. When other people join, they take the place of a bot.</li>
+            <li><strong>Private rooms</strong> are for racing friends. You get a six-character room code to share; anyone who types it joins your room. The host chooses when to start and can add or remove bots.</li>
+            <li><strong>Ghosts</strong> let you race the recorded best lap of any pilot on a leaderboard, at any time, with no one else needed online.</li>
+          </ul>
+
+          <h2>One small server per race</h2>
+          <p>Every live room runs on its own small program in the cloud, on Cloudflare's network. The room's code is its name, so everyone who types the same code reaches the same room. The room keeps the list of seats, starts the countdown, and relays each pilot's position to the others. When a race ends and everyone leaves, the room goes away. There is no game server sitting idle, and a room runs close to the players instead of in one far-away data centre.</p>
+          <p>Room codes use only letters and digits that are hard to confuse when read aloud or typed on a phone. There is no 0 or O, no 1, I or L, so "it's B, not 8" is about the only argument left.</p>
+
+          <h2>Twenty updates a second, drawn smoothly</h2>
+          <p>Each pilot's game sends its quad's position, orientation and speed twenty times a second, packed into 32 bytes. That is small enough to work well on a mobile connection. On every other screen, a remote quad is drawn a tenth of a second in the past, smoothly blended between the two most recent updates. That small delay means there is almost always real data on both sides of the moment being drawn, so remote quads glide instead of jumping.</p>
+          <p>If updates stop for a moment, which happens on mobile networks, the remote quad keeps moving along its last known velocity for a quarter of a second and then holds still. After a longer gap it fades and shows "Reconnecting…". A pilot who drops out has a while to come back and take their seat again before they are counted as not finishing.</p>
+
+          <h2>Everyone flies the bots</h2>
+          <p>Rooms fill empty seats with bots so that a race always feels like a race. A common way to do that is to let one player's game simulate the bots and send their positions to everyone else. We do something different: the room hands every player the same random seed, and every player's game flies the bots itself, with the same physics and the same AI. Because our simulation is deterministic, the bots fly identically on every screen without a single extra byte of network traffic. It also means a bot does not stutter when the player who would have hosted it has a bad connection.</p>
+          <p>Empty seats are filled first with ghosts of real pilots, picked from the middle of the leaderboard rather than the record holder, and then with bots of different skill. You never meet your own ghost.</p>
+
+          <h2>A fair start and a fair clock</h2>
+          <p>The start of a race is set on the room's clock, five seconds ahead. Each player's game measures the difference between its own clock and the room's clock from regular pings, keeping the measurement from the fastest round trip, and counts down to the same moment. Players on slow connections see the same GO as everyone else.</p>
+          <p>The finishing order is also the room's decision, not the players'. When a quad passes a ring, the room records the time on its own clock. Rings only count in order, so no one can skip ahead, and no game can claim a faster lap than the room saw.</p>
+
+          <h2>Ghosts: your best lap, replayable</h2>
+          <p>Whenever you set a personal best, the game keeps a recording of that lap: where your quad was and how it was turned, twenty times a second. A typical lap is about a hundred kilobytes. Replaying it, the game blends between those samples, so the ghost flies as smoothly as you did.</p>
+          <p>Every row on a leaderboard has its ghost attached. Pick any pilot and you can race their best lap on your own, as often as you like, and see exactly where they take the faster line. "Challenge a friend" turns your own best lap into a link: whoever opens it lands on the same course with the same drone, racing your ghost. On iPhone and iPad the link opens straight in the app.</p>
+
+          <h2>Leaderboards that compare like with like</h2>
+          <p>A pilot with a gamepad and a pilot with two thumbs on glass are not playing the same game. That is why every course has its own leaderboard for each drone class, with tabs for touch, keyboard, gamepad and VR pilots, plus an All tab that shows each pilot's best on any controller. Each board shows the top 100, and if you are outside the top 100 you still see your own row and rank. Boards are also cached on your device, so you can look at them offline.</p>
+
+          <h2>Keeping times honest</h2>
+          <p>An online leaderboard is only fun if the times on it are real. Every submitted run goes through checks on the server, using the same rules the game itself uses: the course and time must be valid, there must be exactly one split time per ring, in order, and the recorded ghost has to agree with the lap time and move at speeds a quad can actually fly. Runs that fail those checks are rejected or kept hidden. Pilots can report a name, which also blocks that pilot on their own device and sends the report to the studio.</p>
+
+          <h2>No account, still yours</h2>
+          <p>You do not sign up to race online. The first time you go online, the game creates an anonymous pilot ID with a random pilot name such as "Pilot-0420", which you can change to something you like. Names are unique, so no one else can race under yours. The server stores no email address and no password, only a scrambled form of your pilot's secret key, and pilots who stop playing are removed after two years. Our <a href="/privacy/">privacy policy</a> has the details.</p>
+          <p>Want to try it? Open <a href="https://dronesim.coworkgamestudio.com/play/">Drone Sim</a>, pick Online, and press Quick match. You will be on the start line in seconds.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/a-1khz-flight-model-in-a-browser-tab/">A 1 kHz flight model in a browser tab</a></li><li><a href="/games/drone-sim/courses/">Course guide: every track in Drone Sim</a></li><li><a href="/devlog/getting-started-with-fpv-in-drone-sim/">Getting started with FPV in Drone Sim</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED (Công ty TNHH Cowork), an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Apartment L4-02.OT11 (L4-2.12), 2nd Floor, Tower L4, Vinhomes Central Park, 720A Dien Bien Phu, Thanh My Tay Ward, Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a><br />
+              Phone: <a href="tel:+84985718113">+84 985 718 113</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li>Tax code 0319684925</li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED (Công ty TNHH Cowork). All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Building Ha Long Bay in code · Cowork Game Studio</title>
+    <meta name="description" content="How we built Drone Sim&#x27;s 2.4 km Ha Long Bay course: a real island layout from OpenStreetMap, limestone towers generated in code, AI-assisted hero models baked in Blender, jade water with reflections, and budgets that keep it running on phones and Meta Quest." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/building-ha-long-bay-in-code/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Building Ha Long Bay in code · Cowork Game Studio" />
+    <meta property="og:description" content="How we built Drone Sim&#x27;s 2.4 km Ha Long Bay course: a real island layout from OpenStreetMap, limestone towers generated in code, AI-assisted hero models baked in Blender, jade water with reflections, and budgets that keep it running on phones and Meta Quest." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/building-ha-long-bay-in-code/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/halong-bay-1200.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Building Ha Long Bay in code", "description": "How we built Drone Sim's 2.4 km Ha Long Bay course: a real island layout from OpenStreetMap, limestone towers generated in code, AI-assisted hero models baked in Blender, jade water with reflections, and budgets that keep it running on phones and Meta Quest.", "datePublished": "2026-10-29", "image": "https://coworkgamestudio.com/img/halong-bay-1200.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/building-ha-long-bay-in-code/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Building Ha Long Bay in code</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-10-29">29 October 2026</time> · Drone Sim</p>
+          <figure><img src="/img/halong-bay-1200.jpg" width="1200" height="675" alt="Ha Long Bay course: the quad flies low over emerald water between steep limestone islands" fetchpriority="high" /></figure>
+          <p>Ha Long Bay is one of the most recognisable landscapes in Viet Nam: hundreds of steep limestone islands rising straight out of calm green water. As a studio based in Ho Chi Minh City, we wanted it in Drone Sim from the start. It is also one of the hardest places to put in a game that has to run in a phone browser and in a VR headset: a huge open view, dozens of tall, rough rock towers, and water everywhere reflecting them.</p>
+          <p>The course went through three versions before it shipped. This article walks through what we tried and what we kept.</p>
+
+          <h2>Starting from the real bay</h2>
+          <p>We did not want a generic "islands in the sea" course, so the layout comes from the real bay. Using OpenStreetMap data, published under the Open Database License, we took a 3.4 km square of the bay around the islands of Bồ Hòn, Hang Luồn and Ti Tốp and traced 27 island footprints from it. To make the course work for a racing drone, the map is shrunk to 70% horizontally while the heights of the rock stay at their real scale. The islands end up a little closer together, so there is always something interesting just ahead, and the towers keep their true, dramatic height.</p>
+          <p>A few famous rocks from elsewhere in the bay were brought in as homages, such as the Đỉnh Hương rock, shaped like an incense burner. They are clearly not where they stand in real life, and we say so in our design notes.</p>
+
+          <h2>Version one: towers turned on a lathe</h2>
+          <p>The first bay built every island in code, as a stack of rings of rock, a bit like turning a vase on a lathe, with noise to break up the outline. It was very light, with a few thousand triangles for a nearby tower and a few hundred far away, and it downloaded nothing at all. But real karst towers are not round. They are fluted, overhanging and full of ledges, and the lathe shapes looked smooth and toy-like next to photos of the bay.</p>
+
+          <h2>Version two: a library of sculpted rocks</h2>
+          <p>Next we tried detailed models. For each of twelve rock types we made a concept image, turned it into a high-detail 3D model with an image-to-3D tool, and then rebuilt it ourselves in Blender: a clean low-poly shape with the detail of the original baked into colour and normal maps, at about 8,000 triangles close up and only a few hundred far away. The whole library cost a few hundred generation credits and a few cents of image generation.</p>
+          <p>The models looked good up close. The problem was repetition. Twelve shapes, rotated and scaled, were not enough for a bay of dozens of islands seen from every angle, and the eye quickly spots the same rock twice.</p>
+
+          <h2>Version three: faceted rock built in code</h2>
+          <p>The bay that ships today goes back to code, with a different idea. Each island is built from a stack of convex rock pieces, sliced and faceted like real weathered limestone, so every island is unique. Those same convex pieces are also the island's collision shapes. That matters in a drone game: the rock you see and the rock you hit are exactly the same, so you never clip an invisible corner or fly through a ledge.</p>
+          <p>Generating every island takes several seconds, too long to do on a phone while a race loads. So the bay is generated once, offline, and saved as a compact binary file of about 2 MB compressed, which the game reads in about a tenth of a second. The rock is cut into 357 tiles of 100 metres, each with several levels of detail, drawn in large batches so the whole bay needs only a few dozen draw calls. Near the drone, tiles switch to their most detailed version, and the work of building those is done on a background thread so the frame rate stays smooth.</p>
+          <p>The best of the sculpted library stayed: the Đỉnh Hương rock is still one of the baked models, because nothing generated in code could match it.</p>
+
+          <h2>Rock that looks like rock</h2>
+          <p>The rock surface blends colour detail from our generated textures with free photographic rock and moss materials from ambientCG, published under CC0. Each island gets its own colour map, so weathering, moss and stains differ from island to island. Up to 160 small leaf cards per tower add the vegetation that clings to the real cliffs.</p>
+
+          <h2>Jade water and reflections</h2>
+          <p>The water is a single surface that follows the camera, shaded jade green with small ripples. On powerful computers it shows a true mirror reflection of the towers and the sky, rendered at reduced resolution to save time. On phones and in VR, that mirror would cost several milliseconds per frame, so those devices reflect a captured image of the sky and surroundings instead. You get the same colour and mood, at a fraction of the cost.</p>
+          <p>The sky is a mid-morning scene with the sun low in the east. Fog over the bay thins out with height, so distant islands fade into haze the way they do on a humid morning, while the view from high above stays clear.</p>
+
+          <h2>Budgets for every device</h2>
+          <p>Every course in Drone Sim has to stay within a budget of draw calls and triangles per frame for each class of device. For Ha Long Bay, in our measurements:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Device class</th><th>Budget (draws / triangles)</th><th>Ha Long Bay, measured</th></tr></thead>
+              <tbody>
+                <tr><td>Desktop, high quality</td><td>150 / 600,000</td><td>59–75 / 121,000–183,000</td></tr>
+                <tr><td>iPhone, medium quality</td><td>110 / 250,000</td><td>31–39 / 42,000–60,000</td></tr>
+                <tr><td>Meta Quest, both eyes</td><td>80 / 120,000</td><td>30–44 / 52,000–111,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The Quest number is the tightest: a headset draws every frame twice, once per eye, at a high, steady frame rate. The detail ranges for each quality level are tuned so that the bay looks right from the drone's height without crossing those limits.</p>
+
+          <h2>Water is part of the course</h2>
+          <p>The last piece is gameplay. On Ha Long Bay the water is not just scenery: touch it and your run ends. That turns skimming low between the islands, the most beautiful way to fly the bay, into a real test of throttle control. The Full route is a long, 48-ring tour of the bay; the Sprint route keeps 13 rings for quick races.</p>
+          <p>You can fly it for free in the browser: open <a href="https://dronesim.coworkgamestudio.com/play/">Drone Sim</a> and choose Ha Long Bay, or read the <a href="/games/drone-sim/courses/">course guide</a> for tips.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/hoi-an-by-night-from-openstreetmap/">Hoi An by Night: a real old town from OpenStreetMap</a></li><li><a href="/games/drone-sim/courses/">Course guide: every track in Drone Sim</a></li><li><a href="/devlog/a-1khz-flight-model-in-a-browser-tab/">A 1 kHz flight model in a browser tab</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED (Công ty TNHH Cowork), an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Apartment L4-02.OT11 (L4-2.12), 2nd Floor, Tower L4, Vinhomes Central Park, 720A Dien Bien Phu, Thanh My Tay Ward, Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a><br />
+              Phone: <a href="tel:+84985718113">+84 985 718 113</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li>Tax code 0319684925</li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED (Công ty TNHH Cowork). All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
