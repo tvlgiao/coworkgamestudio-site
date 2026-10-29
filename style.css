@@ -104,6 +104,8 @@ kbd { font: 600 0.85em/1 ui-monospace, SFMono-Regular, Menlo, monospace; backgro
 .tags li { margin: 0; font: 600 0.8rem/1 var(--font-head); padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: var(--bg-2); }
 .tags li.on { color: #04121a; background: var(--lime); border-color: var(--lime); }
 .post-card { display: flex; flex-direction: column; }
+.post-card .thumb { display: block; margin: -24px -24px 16px; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
+.post-card .thumb img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .post-card h3 a { color: #f4f8fc; text-decoration: none; }
 .post-card h3 a:hover { color: var(--cyan); }
 .post-card .more { margin-top: auto; padding-top: 10px; font-weight: 600; }
