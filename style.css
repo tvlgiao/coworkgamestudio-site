@@ -159,3 +159,19 @@ details p { margin: 10px 0 0; }
 .site-footer address { font-style: normal; line-height: 1.6; }
 .copy { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 18px; font-size: 0.85rem; }
 article.wrap { padding-top: 48px; }
+
+/* Store badges (same look as the official Drone Sim site) */
+.st-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 10px; margin-top: 18px; }
+.st-badge { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 7px 14px 7px 12px; color: var(--text); background: #000; border: 1px solid #eaf6ff47; border-radius: 10px; line-height: 1.1; text-decoration: none; transition: border-color .15s, background-color .15s; }
+.st-badge:hover { border-color: var(--cyan); background: #07101c; }
+.st-badge:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.st-badge__icon { flex: none; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6px; stroke-linejoin: round; stroke-linecap: round; }
+.st-badge__text { display: flex; flex-direction: column; align-items: flex-start; }
+.st-badge__kicker { font-size: .68rem; letter-spacing: .04em; color: var(--muted); }
+.st-badge__name { font-size: 1.05rem; font-weight: 650; letter-spacing: .01em; }
+.st-badge.is-soon { color: #eaf6ffc7; background: #00000073; border-style: dashed; border-color: #eaf6ff38; }
+.st-badge.is-soon .st-badge__kicker { color: #ffc24a; text-transform: uppercase; letter-spacing: .12em; font-size: .6rem; font-weight: 700; }
+.st-badge--apple { display: block; flex: none; padding: 0; margin: 0 2px; background: none; border: 0; border-radius: 0; min-height: 0; line-height: 0; }
+.st-badge--apple:hover { background: none; }
+.st-badge--apple img { display: block; width: auto; height: 48px; max-width: none; }
+.st-note { margin-top: 10px; font-size: .9rem; color: var(--muted); }
