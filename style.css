@@ -175,3 +175,4 @@ article.wrap { padding-top: 48px; }
 .st-badge--apple:hover { background: none; }
 .st-badge--apple img { display: block; width: auto; height: 48px; max-width: none; }
 .st-note { margin-top: 10px; font-size: .9rem; color: var(--muted); }
+.prose video { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
