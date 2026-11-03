@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Designing GPS mode: flying in the first minute · Cowork Game Studio</title>
+    <meta name="description" content="Why Drone Sim has a GPS mode, how it holds height and position on top of the same flight controller as Acro, and the 110 km/h bug that taught us where to stop." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/designing-gps-mode/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Designing GPS mode: flying in the first minute · Cowork Game Studio" />
+    <meta property="og:description" content="Why Drone Sim has a GPS mode, how it holds height and position on top of the same flight controller as Acro, and the 110 km/h bug that taught us where to stop." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/designing-gps-mode/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/city-chase-1200.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Designing GPS mode: flying in the first minute", "description": "Why Drone Sim has a GPS mode, how it holds height and position on top of the same flight controller as Acro, and the 110 km/h bug that taught us where to stop.", "datePublished": "2026-11-03", "image": "https://coworkgamestudio.com/img/city-chase-1200.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/designing-gps-mode/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Behind the scenes</p>
+          <h1>Designing GPS mode: flying in the first minute</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-03">3 November 2026</time> · Drone Sim</p>
+          <figure><img src="/img/city-chase-1200.jpg" width="1200" height="675" alt="A racing quad flies down a city street at dusk towards a glowing ring, seen from the chase camera" fetchpriority="high" /></figure>
+          <p>Most people who open Drone Sim have never flown an FPV quad. If the first thing they get is Acro mode, they crash in two seconds and leave. So we built GPS mode, which flies a lot like a camera drone's GPS mode: let go of the sticks and the quad stops and waits.</p>
+          <p>This post is about how we built it, and one bug that made us rethink it.</p>
+
+          <h2>Same quad, one more layer</h2>
+          <p>We did not want GPS mode to be a different, fake physics. It runs on the same simulated quad and the same Betaflight-style flight controller as Angle and Acro. GPS is just an extra loop on top that moves the sticks for you. Acro is pure rate control, Angle levels the quad and limits it to 55 degrees, and GPS adds height hold and position hold above that.</p>
+          <p>That means what you learn in GPS still counts later. The quad has the same weight, the same motors and the same drag when you switch modes.</p>
+
+          <h2>No arm switch</h2>
+          <p>On a real quad you arm the motors with a switch, and only with the throttle low and the quad level. That is a good safety rule and a terrible first minute. In GPS mode there is no arm step. The quad arms itself when the race or Free Fly starts, and the ARM button is hidden on touch screens.</p>
+          <p>We kept one check: if the quad is tipped over more than 60 degrees it will not arm, and the screen says "Tipped over, tap RESET". Angle and Acro still need low throttle and a level quad, like the real thing, and the tutorial still teaches manual arming for when you move up.</p>
+
+          <h2>Holding height</h2>
+          <p>In GPS mode the throttle stick is not power, it is a climb rate. Centre the stick and the quad holds its height. Push up and it climbs at up to 3 m/s, pull down and it sinks at up to 2.5 m/s. There is a small dead band around the centre so a loose thumb does not make it drift, a bit wider on Quest controllers.</p>
+          <p>The height reading has a bit of noise in it, like the barometer on a real quad, so the hold is not perfectly glued to one line. We also correct the thrust when the quad leans over, up to 45 degrees. We tested every drone flying at full stick for ten seconds, and all of them stay within 0.7 m of the height they were holding.</p>
+
+          <h2>Holding position</h2>
+          <p>The right stick sets a speed over the ground instead of a tilt. Let go and the quad brakes to a stop by itself. The braking is limited so it never leans harder than a real quad would: 45 degrees at most, usually 15 to 35 degrees when stopping, and about 1.4 g including drag.</p>
+          <p>In the classic two-stick layout, full stick starts at 8 m/s, about 29 km/h. Keep holding it and the speed target creeps up by 2 m/s every second, so you can go fast on a long straight without leaving GPS mode. Holding full throttle does the same for climbing, adding 1 m/s every second.</p>
+
+          <h2>The 110 km/h bug</h2>
+          <p>The first version of that speed ramp had no limit. Then we tried the 7 inch long range quad, held full stick down a long course, and watched it pass 110 km/h and start to sink.</p>
+          <p>Nothing was broken in the physics. At that speed the air rushing through the props eats most of the lift, so the quad had to lean so far forward that it could not hold its height anymore. A real quad would do the same.</p>
+          <p>The fix was simple: the ramp stops as soon as the quad starts losing height, and backs off if it keeps sinking. So GPS mode now goes as fast as each drone can really go and still fly level, and no faster.</p>
+
+          <h2>A calmer option in VR</h2>
+          <p>On Meta Quest, fast speed changes in front of your eyes can make people feel sick. If you turn on VR Comfort in Settings, GPS speed is fixed at 4 m/s with no ramp. With it off, VR flies the same as on a screen.</p>
+
+          <h2>Moving on from GPS</h2>
+          <p>GPS mode is there to get you flying, not to keep you there. Once you can get through a course, try Angle, then Acro. The <a href="/devlog/gps-angle-acro-flight-modes-explained/">flight modes guide</a> explains the steps, and you can switch mode any time from the MODE button.</p>
+          <p>You can try it now in the browser at <a href="https://dronesim.coworkgamestudio.com/play/">dronesim.coworkgamestudio.com</a>. Next week: how we tuned the six drones so each one feels different.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/gps-angle-acro-flight-modes-explained/">GPS, Angle and Acro: flight modes explained</a></li><li><a href="/devlog/a-1khz-flight-model-in-a-browser-tab/">A 1 kHz flight model in a browser tab</a></li><li><a href="/games/drone-sim/drones/">The six drones of Drone Sim</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED, an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED. All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
