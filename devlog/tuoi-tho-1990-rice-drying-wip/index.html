@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
     <title>Tuổi Thơ 1990: drying the rice, work in progress · Cowork Game Studio</title>
-    <meta name="description" content="A work in progress look at the new chapter of Tuổi Thơ 1990, a gentle memoir game about a seven-year-old girl growing up in the early 1990s in southern Vietnam: raking rice, tying sacks and a sudden rain." />
+    <meta name="description" content="A look at chapter 4 of Tuổi Thơ 1990 (Childhood 1990), a memoir game about a rural southern Vietnam childhood: raking rice on a 2 cm grid, tying sacks and a rain round." />
     <link rel="canonical" href="https://coworkgamestudio.com/devlog/tuoi-tho-1990-rice-drying-wip/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
@@ -14,7 +14,7 @@
     <meta property="og:site_name" content="Cowork Game Studio" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Tuổi Thơ 1990: drying the rice, work in progress · Cowork Game Studio" />
-    <meta property="og:description" content="A work in progress look at the new chapter of Tuổi Thơ 1990, a gentle memoir game about a seven-year-old girl growing up in the early 1990s in southern Vietnam: raking rice, tying sacks and a sudden rain." />
+    <meta property="og:description" content="A look at chapter 4 of Tuổi Thơ 1990 (Childhood 1990), a memoir game about a rural southern Vietnam childhood: raking rice on a 2 cm grid, tying sacks and a rain round." />
     <meta property="og:url" content="https://coworkgamestudio.com/devlog/tuoi-tho-1990-rice-drying-wip/" />
     <meta property="og:image" content="https://coworkgamestudio.com/img/tuoi-tho-1990-ch4-rake-carry-1280.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
     <link rel="stylesheet" href="/style.css" />
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Tuổi Thơ 1990: drying the rice, work in progress", "description": "A work in progress look at the new chapter of Tuổi Thơ 1990, a gentle memoir game about a seven-year-old girl growing up in the early 1990s in southern Vietnam: raking rice, tying sacks and a sudden rain.", "datePublished": "2026-11-02", "image": "https://coworkgamestudio.com/img/tuoi-tho-1990-ch4-rake-carry-1280.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/tuoi-tho-1990-rice-drying-wip/"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Tuổi Thơ 1990: drying the rice, work in progress", "description": "A look at chapter 4 of Tuổi Thơ 1990 (Childhood 1990), a memoir game about a rural southern Vietnam childhood: raking rice on a 2 cm grid, tying sacks and a rain round.", "datePublished": "2026-11-02", "image": "https://coworkgamestudio.com/img/tuoi-tho-1990-ch4-rake-carry-1280.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/tuoi-tho-1990-rice-drying-wip/"}</script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -40,25 +40,67 @@
           <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-02">2 November 2026</time> · Tuổi Thơ 1990</p>
           <figure><img src="/img/tuoi-tho-1990-ch4-rake-carry-1280.jpg" width="1280" height="720" alt="The girl carries a rake on her shoulder across the yard while rice dries" fetchpriority="high" /></figure>
           <p>Hi everyone,</p>
-          <p>Here is a look at what we are working on in <strong>Tuổi Thơ 1990</strong>, our gentle memoir game about a seven-year-old girl growing up in the early 1990s in southern Vietnam. This new chapter is about drying the rice harvest in the yard. It is a work in progress and it is not in the public build yet. Chapter 2 is the one you can play right now, on <a href="https://coworkgames.itch.io/tuoi-tho-1990">itch.io</a>.</p>
+          <p>Here is a look at what we are working on in <strong>Tuổi Thơ 1990</strong>, called <strong>Childhood 1990</strong> in English. It is a memoir game about growing up in the countryside of southern Vietnam in the early 1990s, built from the creator's own childhood memories. You play a girl of about seven with three younger siblings: a brother of about five, a sister of about three and a baby brother.</p>
+          <p>The game is a low-poly 3D diorama with the camera looking down over the family's yard. The interface is in English and Vietnamese, and you can switch between them at any time. This post is about chapter 4, which is about drying the rice harvest in the yard. It is a work in progress.</p>
+
+          <h2>How the game is designed</h2>
+          <p>A few rules hold across the whole game:</p>
+          <ul>
+            <li>There is no Game Over.</li>
+            <li>There are no random interruptions. Anything that happens to you is a scripted moment that we placed on purpose.</li>
+            <li>The currency is cashew nuts. Three cashews buy one ice cream.</li>
+          </ul>
+          <p>The rules come from the same place as the story. A memory has no fail state, and the things that broke into a day back then are written into the game as set moments instead of being rolled at random. That is why the rain in chapter 4 is a round of its own and not random weather.</p>
+          <p>The full design covers 40 missions, 12 mini-games and 16 side quests.</p>
 
           <h2>Chores in the yard</h2>
-          <p>The girl rakes the rice, carries the rake on her shoulder, spreads tarps and drags sacks across the yard. Mom lifts a full sack onto her shoulder and sets it down again, steadying it with her free hand. The chores in this chapter now play from start to finish. The clip below is a rough pass.</p>
-          <figure><video controls muted playsinline preload="metadata" poster="/img/tuoi-tho-1990-ch4-chores-poster.jpg" width="1280" height="720"><source src="/video/tuoi-tho-1990-ch4-chores.mp4" type="video/mp4" /></video><figcaption>Work in progress: Mom carries a sack, the girl carries the rake.</figcaption></figure>
+          <p>Chapter 4 is a set of chores around drying rice: pouring it out of sacks, raking it thin, picking up twigs, dragging and filling sacks, and covering everything when the rain comes. Mom works alongside her in several of them, from filling sacks to the rain round.</p>
+          <p>The girl rakes the rice, carries the rake on her shoulder, spreads tarps and drags sacks across the yard. Mom carries the full sacks. The clip below is from an earlier build.</p>
+          <figure><video controls muted playsinline preload="metadata" poster="/img/tuoi-tho-1990-ch4-chores-poster.jpg" width="1280" height="720"><source src="/video/tuoi-tho-1990-ch4-chores.mp4" type="video/mp4" /></video><figcaption>Earlier build: Mom carries a sack, the girl carries the rake.</figcaption></figure>
+          <p>There are smaller jobs too. The girl picks up twigs from the yard and throws them onto a rubbish heap. While she carries them her arms swing naturally, and when she throws she looks down at the heap.</p>
 
-          <h2>Filling and tying the sacks</h2>
-          <p>Mom holds the mouth of a cloth sack open while the girl pours the rice in. Mom gathers the mouth, the girl ties it and drags it to its spot. Three sacks end up in a row. Afterwards the girl carries the folded empty sack out and lays it down. The sacks used to look silver in the sun, so they now share an aged ivory cloth look.</p>
-          <figure><img src="/img/tuoi-tho-1990-ch4-three-sacks-1280.jpg" width="1280" height="720" alt="Three tied rice sacks lying in a row on a mat in the yard" loading="lazy" /><figcaption>Work in progress: placeholder props are still in the scene.</figcaption></figure>
-          <p>We also have a small preview of the girl flicking rice out of a bamboo basket so it spreads over the yard. It is not in the game yet.</p>
-          <figure><img src="/img/tuoi-tho-1990-ch4-basket-pour-1600.jpg" width="1600" height="600" alt="A row of frames showing the girl flicking rice out of a small bamboo basket" loading="lazy" /><figcaption>Animation preview.</figcaption></figure>
+          <h2>Raking the rice</h2>
+          <p>The main job of the chapter starts with a sack. The girl pours the rice onto a heap in her cell of the yard, then rakes it out into a thin, even layer, about half a centimetre deep, so it can dry in the sun.</p>
+          <p>Under the hood, the rice is a thickness map on a 2 cm grid. Every pass of the rake moves rice from one part of the map to another, so as the layer spreads out the heap really shrinks.</p>
+          <p>Each square of the grid stores how much rice sits on it. When the rake teeth cross a square they take rice from it and push it on to the squares ahead. Rice is only moved, never added or deleted, so the tall heap in the middle of the cell turns into a wide, thin layer as you work, and the heap you poured is exactly the rice you have to spread.</p>
+          <p>One design decision shaped the whole chore. Rice moves only under the teeth of the rake, never by itself. At one point we had an auto-slide that let the heap settle and spread a little on its own. It looked convenient, but it felt fake, so we took it out. This is a memory game, and the chore should feel like the real one.</p>
 
-          <h2>Rain</h2>
-          <p>Then the sky turns and it rains. The family covers the rice with tarps, and Mom weighs them down with 12 bricks, one at a time, carrying each at her hip and setting it on a corner. The chapter ends with the girl stopping on the porch to look up at the clouds.</p>
-          <figure><img src="/img/tuoi-tho-1990-ch4-bricks-1280.jpg" width="1280" height="720" alt="Mom walking between tarps with a brick on each corner" loading="lazy" /><figcaption>Work in progress: the tarps with bricks on the corners.</figcaption></figure>
-          <figure><img src="/img/tuoi-tho-1990-ch4-clouds-1280.jpg" width="1280" height="720" alt="The girl standing on the porch looking up at the sky" loading="lazy" /><figcaption>Work in progress: the last moment of the chapter.</figcaption></figure>
+          <h2>Next: filling the sacks</h2>
+          <p>Next, Mom and the girl will fill and tie the sacks: Mom holds the mouth of a cloth sack open while the girl pours the rice in, then the girl ties it and drags it to its spot.</p>
 
-          <h2>Smaller fixes</h2>
-          <p>We repainted the girl's face in a softer style with clearer mouth shapes. We also fixed a lot of arm and hand motion, so no more twisted forearms and no hands going through cloth. There is still plenty to do.</p>
+          <h2>Update, November 2026: the rain round</h2>
+          <p>Then the sky turns and it rains. The rain round lasts about 80 seconds and we are finishing it now.</p>
+          <p>The round plays out in a fixed order:</p>
+          <ul>
+            <li>The rain starts while the rice is still spread out.</li>
+            <li>The girl rakes her cell back into a pile and covers it with a tarp.</li>
+            <li>At the same time Mom rakes up the two cells beside her, using her own adult-sized rake.</li>
+            <li>Then the two of them cover Mom's piles together.</li>
+            <li>At the end of the round, bricks go on the edges of the tarps to hold them down, the way people did so the wind could not lift the tarps away.</li>
+          </ul>
+          <figure><img src="/img/tuoi-tho-1990-ch4-rain-tarps-1280.jpg" width="1280" height="720" alt="Rain over the yard: blue tarps cover two rice piles while Mom rakes a third cell behind the girl" loading="lazy" /><figcaption>Current build: the rain round, with Mom raking behind the girl.</figcaption></figure>
+          <p>The rain has its own look:</p>
+          <ul>
+            <li>thin streaks, slanted a little by the wind,</li>
+            <li>the yard ground darkening over about two seconds as it gets wet,</li>
+            <li>small splash rings where drops hit,</li>
+            <li>a porch that stays dry.</li>
+          </ul>
+          <figure><img src="/img/tuoi-tho-1990-ch4-rain-yard-1280.jpg" width="1280" height="720" alt="The girl stands at the edge of the yard in the rain, looking at three cells of rice spread thin" loading="lazy" /><figcaption>Current build: rain over the spread rice, with splash rings on the ground.</figcaption></figure>
+
+          <h2>Checking every gesture</h2>
+          <p>With the camera above the yard, you read the characters mostly by how they move, not by their faces. So every gesture is checked frame by frame, from the side and from the game camera, before it is approved. The side view shows problems the overhead camera hides, and the game camera shows what you will actually see. On top of that, automatic checks measure three things in millimetres:</p>
+          <ul>
+            <li>hands stay on the rake handle,</li>
+            <li>feet do not slide over the ground,</li>
+            <li>arms do not pass through the body.</li>
+          </ul>
+          <p>A gesture that passes is then approved in a viewer before it goes into the game. It is slow, but it is the only way we have found to keep a seven-year-old raking rice from looking like a puppet.</p>
+          <p>Along the way we repainted the girl's face in a softer style with clearer mouth shapes, and fixed a lot of arm and hand motion, so no more twisted forearms and no hands going through cloth.</p>
+
+          <h2>What comes next</h2>
+          <p>Next we are polishing chapter 4: the porch and the final sacks mission. After that, more missions. We will post again when there is something new to show.</p>
+          <p>If you like slow, cozy games, have a look at <a href="/devlog/coffee-street-dalat-hills-first-look/">Coffee Street: Dalat Hills</a>, our coffee cart game set on a Da Lat hillside. Everything else we make is on the <a href="/games/">games page</a> and the <a href="/devlog/">devlog</a>.</p>
 
           <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
           <h2>More from the devlog</h2><ul><li><a href="/devlog/coffee-street-dalat-hills-first-look/">Coffee Street: Dalat Hills, our next game</a></li><li><a href="/games/">All our games</a></li></ul>
