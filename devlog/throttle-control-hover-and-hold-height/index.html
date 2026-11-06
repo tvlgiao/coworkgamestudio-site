@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Throttle control in an FPV sim: how to hover, hold height and stop drifting · Cowork Game Studio</title>
+    <meta name="description" content="A practice plan for new FPV pilots: why the throttle is the hardest stick, what GPS, Angle and Acro do with it, drills on the Training Field, Night Loft and Toy Town, and how to read common throttle mistakes." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/throttle-control-hover-and-hold-height/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Throttle control in an FPV sim: how to hover, hold height and stop drifting · Cowork Game Studio" />
+    <meta property="og:description" content="A practice plan for new FPV pilots: why the throttle is the hardest stick, what GPS, Angle and Acro do with it, drills on the Training Field, Night Loft and Toy Town, and how to read common throttle mistakes." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/throttle-control-hover-and-hold-height/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/los-1280.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Throttle control in an FPV sim: how to hover, hold height and stop drifting", "description": "A practice plan for new FPV pilots: why the throttle is the hardest stick, what GPS, Angle and Acro do with it, drills on the Training Field, Night Loft and Toy Town, and how to read common throttle mistakes.", "datePublished": "2026-11-06", "image": "https://coworkgamestudio.com/img/los-1280.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/throttle-control-hover-and-hold-height/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Guide</p>
+          <h1>Throttle control in an FPV sim: how to hover, hold height and stop drifting</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-06">6 November 2026</time> · Drone Sim</p>
+          <figure><img src="/img/los-1280.jpg" width="1280" height="589" alt="Line-of-sight view in Angle mode: the quad hovers low over the floor of the brick Night Loft among cyan and magenta rings, with touch sticks on screen" fetchpriority="high" /></figure>
+          <p>Pitch, roll and yaw are about direction. The throttle is about staying in the air at all, and it never stops needing attention. This guide is a practice plan for that one stick, using Drone Sim as the practice tool. It assumes you have done the tutorial; if not, start with <a href="/devlog/getting-started-with-fpv-in-drone-sim/">Getting started with FPV in Drone Sim</a>.</p>
+
+          <h2>Why the throttle is the hardest stick</h2>
+          <p>First, on the other sticks centre means "do nothing". On a raw throttle, the position that holds the quad still is somewhere in the middle of the travel, and you have to find it and keep your thumb there. On most real transmitters the throttle stick does not spring back to centre either, so it stays wherever your thumb leaves it.</p>
+          <p>Second, the quad answers late. Drone Sim models each motor with a short spin-up lag, a few hundredths of a second, longer for big props than for tiny ones. The quad also has real momentum. So you add power, nothing seems to happen, you add more, and then all of it arrives at once. That is the root of most beginner over-correction: reacting to where the quad is instead of where it is going.</p>
+          <p>Third, the right amount of throttle keeps changing. Tilt the quad and part of the motors' push goes into moving sideways instead of holding it up, so it sinks. Fly close to the ground and ground effect gives a little extra lift, which Drone Sim calculates for each rotor. Fly for a while and the battery sags; the game simulates a lithium pack whose voltage falls as it empties, and while the flight controller compensates for most of the flight, the last minute of a long flight is noticeably weaker. The hover point is a moving target.</p>
+
+          <h2>What the three modes do with the throttle</h2>
+          <p>The <a href="/devlog/gps-angle-acro-flight-modes-explained/">flight modes guide</a> covers the modes in full. For throttle practice, this is the part that matters:</p>
+          <ul>
+            <li><strong>GPS</strong> turns the throttle into a climb rate. Centre holds the current height, up climbs, down descends. This works on controls that spring back to centre, including touch with throttle auto-centre on. Climbs are capped at 3 m/s and descents at 2.5 m/s, and a small dead band around centre stops a loose thumb from causing drift.</li>
+            <li><strong>Angle</strong> levels the quad when you let go of the right stick, but the throttle is raw. It stays where you leave it, and the quad climbs or sinks depending on how much power you give it. Every time you tilt, you need a bit more.</li>
+            <li><strong>Acro</strong> gives you raw throttle and no levelling at all. The quad holds whatever attitude you leave it in, so the throttle pushes along whatever direction the quad happens to be pointing, not always up.</li>
+          </ul>
+          <h2>Set up before you practise</h2>
+          <p>These throttle settings sit on the same screen as the <a href="/devlog/rates-and-expo-explained/">rates</a>:</p>
+          <ul>
+            <li><strong>Throttle mid</strong> is the output at the centre of the stick. Leave it on Auto, which sets it to the hover point.</li>
+            <li><strong>Throttle expo</strong> flattens the curve around mid, so small movements near hover make smaller changes.</li>
+            <li><strong>Throttle limit</strong> caps the output at full stick while centre still hovers. Useful if a full punch sends you into the ceiling.</li>
+          </ul>
+          <p>On a gamepad you can put throttle on a stick or on the right trigger, and set the stick deadzone in the controller setup. On a keyboard, where a key is either on or off, <strong>X</strong> snaps the throttle to the estimated hover point in Angle and Acro. Use it as a reset, not a crutch.</p>
+          <p>For the drone, fly <strong>Strider</strong>, the quad the default settings are tuned around. <strong>Dome</strong> is the gentler choice for the indoor stages because its prop guards let it bump off walls. Leave <strong>Pip</strong> for later: it is light and floaty and drifts with every input, which is a good lesson but a confusing first one. For the camera, chase is the easiest view for judging height.</p>
+
+          <h2>The practice plan</h2>
+          <p>Do one or two stages per session, and repeat any that still feel like a fight. Free Fly has no clock and no course, so use it for every drill that does not need rings.</p>
+
+          <h3>Stage 1: GPS, Training Field, height steps</h3>
+          <p>Open Free Fly on the Training Field in GPS mode. Climb to about head height and let go of the throttle. The quad stays there. Now fly height steps: push up a little, stop at roughly twice the height, let go. Pull down a little, stop, let go. Notice how the climb rate follows how far you move the stick.</p>
+          <p>The goal is to learn what your thumb is doing. Most beginners are surprised how small a movement is enough.</p>
+
+          <h3>Stage 2: Angle, Training Field, the ten-second hover</h3>
+          <p>Switch to Angle. Unlike GPS, Angle needs the throttle low and the quad level before it arms, just like a real quad. Arm, then raise the throttle slowly until the quad lifts off, and try to hold it at head height for ten seconds. The course guide calls this the single most useful FPV skill, and it is right.</p>
+          <ul>
+            <li>Hover at head height, then come down to just above the grass and hold there. Close to the ground the quad gets extra lift from its own downwash, so the same stick position hovers higher.</li>
+            <li>Once the hover is steady, fly slowly to each of the three rings and stop next to it. Every time you tilt forward, add a touch of throttle. Every time you level out to stop, take that touch away again.</li>
+            <li>Land by lowering the throttle a little at a time.</li>
+          </ul>
+
+          <h3>Stage 3: Angle, Night Loft, holding height in a box</h3>
+          <p>The Night Loft is a tight indoor course with ceiling beams and a ceiling fan whose blades really are solid. The course guide calls it the best place to learn precise throttle control: floor and ceiling are close together and you feel both. Fly Dome here; it survives the walls far better than open-prop quads.</p>
+          <p>Start in Free Fly and hover at mid height between floor and beams. Then race the Sprint route, which keeps six of the twelve rings, alone. Keep your speed down through the first rings and watch the fan before you pass it.</p>
+
+          <h3>Stage 4: Angle, Toy Town, climbing on time</h3>
+          <p>Toy Town has wide streets and an open sky, and its route runs over the towers. The tip from the course guide: those rings reward a smooth climb started early, not a hard pull-up at the last moment. That is a pure throttle lesson. Fly it alone, then race the Novice and Rookie bots, who also fly in Angle.</p>
+
+          <h3>Stage 5: Acro, back in the open</h3>
+          <p>In Acro, go back to the Training Field and climb high first so you have time to recover. Roll to a gentle bank, hold it, and notice that the quad starts to sink: the throttle is now pushing partly sideways. Add a little throttle to keep height through the bank, then take it out as you roll back to level. If the quad gets away from you, switch to GPS with one press, let it level, and switch back. Later, in the Alpine Valley, tilt forward before you add throttle so you carry speed into the climbs.</p>
+
+          <h2>Common mistakes and how to read them</h2>
+          <ul>
+            <li><strong>The quad bounces up and down and the bounces get bigger.</strong> You are over-correcting. Each correction arrives late and you correct the correction. Make smaller movements and wait to see the result before you move again. Throttle expo helps.</li>
+            <li><strong>The quad slowly sinks during forward flight.</strong> You tilted without adding throttle. In Angle and Acro, tilt and throttle go together.</li>
+            <li><strong>The quad shoots up when you stop.</strong> The extra throttle you added for forward flight is still there when you level out, and now it all pushes straight up. Ease it off as you level.</li>
+            <li><strong>The quad drifts sideways in an Angle hover.</strong> That is not the throttle. Angle levels the quad but does not hold its position, so any speed you had keeps carrying you. Correct with small right-stick inputs.</li>
+            <li><strong>The hover worked at the start but now the quad sinks.</strong> Late in a long flight the simulated battery is weaker, so the same stick gives less push.</li>
+            <li><strong>Hard landings.</strong> The throttle came down too fast, and the motors cannot spin back up in time to catch the drop.</li>
+          </ul>
+          <p>On Hoi An by Night and Ha Long Bay, touching the water ends your run, so a small sink costs you the race. On Ha Long Bay, fly a metre or two higher until you know the line.</p>
+
+          <h2>When to move up a mode</h2>
+          <p>Move from GPS to Angle once you can make the quad stop at a chosen height without thinking, and you have finished a race in Toy Town in GPS. Move from Angle to Acro when you can hold the ten-second hover without looking at your thumbs, fly the Night Loft without bouncing off the floor or beams, and beat the Rookie opponent. Finishing the Night Loft without a crash is also one of the goals for earning Needle, so it makes a good test.</p>
+          <p>Moving up does not mean never going back. A few minutes of Angle hovering is a good warm-up at any level.</p>
+
+          <h2>Keep it short and often</h2>
+          <p>Throttle control comes from many short sessions more than a few long ones. You can practise right now in your browser at <a href="https://dronesim.coworkgamestudio.com/play/">dronesim.coworkgamestudio.com/play/</a>, or get the game for iPhone, iPad, Mac, Android or Meta Quest from the <a href="/games/drone-sim/">Drone Sim page</a>.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/gps-angle-acro-flight-modes-explained/">GPS, Angle and Acro: flight modes explained</a></li><li><a href="/devlog/rates-and-expo-explained/">Rates and expo explained</a></li><li><a href="/games/drone-sim/courses/">Course guide: every track in Drone Sim</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED, an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED. All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
