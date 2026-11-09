@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Six drone classes, one flight controller · Cowork Game Studio</title>
+    <meta name="description" content="How we made the six drones in Drone Simulator: FPV Racing feel different: mass, punch, drag and motor lag change per class, while the flight controller and stick rates stay the same." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/drone-classes-six-airframes-one-controller/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Six drone classes, one flight controller · Cowork Game Studio" />
+    <meta property="og:description" content="How we made the six drones in Drone Simulator: FPV Racing feel different: mass, punch, drag and motor lag change per class, while the flight controller and stick rates stay the same." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/drone-classes-six-airframes-one-controller/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/drone-classes-hangar-1600.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Six drone classes, one flight controller", "description": "How we made the six drones in Drone Simulator: FPV Racing feel different: mass, punch, drag and motor lag change per class, while the flight controller and stick rates stay the same.", "datePublished": "2026-11-09", "image": "https://coworkgamestudio.com/img/drone-classes-hangar-1600.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/drone-classes-six-airframes-one-controller/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Six drone classes, one flight controller</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-09">9 November 2026</time> · Drone Simulator: FPV Racing</p>
+          <figure><img src="/img/drone-classes-hangar-1600.jpg" width="1600" height="900" alt="The drone picker in the hangar, with Strider on a lit pad and cards for all six drones showing top speed, punch and flight time" fetchpriority="high" /></figure>
+          <p>Last week was <a href="/devlog/designing-gps-mode/">GPS mode</a>. This week, as promised: how we tuned the six drones so each one feels different.</p>
+          <p>Real FPV quads come in classes. A tiny whoop, a five-inch racer and a seven-inch long-range rig share the same basic parts, but they fly nothing alike. We wanted the same in the game, without six different sets of physics.</p>
+
+          <h2>The six classes</h2>
+          <p>Each drone is modelled on a real build: a weight, a motor size and KV, props and a battery. We fly every drone in the game's 1 kHz physics harness and measure what comes out. The numbers below are measured, not typed in, and our tests keep them within 5%.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Drone</th><th>Class</th><th>Weight</th><th>Thrust to weight</th><th>Top speed</th><th>Flight time</th><th>Level</th><th>Crashes above</th></tr></thead>
+              <tbody>
+                <tr><td>Strider</td><td>Freestyle 5"</td><td>715 g</td><td>8.7</td><td>146 km/h</td><td>about 4:02</td><td>Intermediate</td><td>5 m/s</td></tr>
+                <tr><td>Bolt</td><td>Racer 5"</td><td>560 g</td><td>12</td><td>163 km/h</td><td>about 3:45</td><td>Advanced</td><td>5 m/s</td></tr>
+                <tr><td>Dome</td><td>Cinewhoop 3"</td><td>450 g</td><td>4.5</td><td>74 km/h</td><td>about 3:42</td><td>Beginner</td><td>9 m/s</td></tr>
+                <tr><td>Pip</td><td>Tiny whoop 65 mm</td><td>32 g</td><td>3.5</td><td>50 km/h</td><td>about 3:10</td><td>Beginner</td><td>12 m/s</td></tr>
+                <tr><td>Needle</td><td>Toothpick 3"</td><td>130 g</td><td>8</td><td>105 km/h</td><td>about 3:22</td><td>Intermediate</td><td>5 m/s</td></tr>
+                <tr><td>Condor</td><td>Long range 7"</td><td>1.15 kg</td><td>5</td><td>133 km/h</td><td>about 9:42</td><td>Intermediate</td><td>5 m/s</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Flight times are for mixed flying. "Crashes above" is the impact speed above which a hit counts as a crash and you respawn; slower knocks only bump the drone.</p>
+          <p><strong>Strider</strong> is the reference: a five-inch freestyle quad with 2306 1850 KV motors, 5.1-inch tri-blades, a 6S 1300 battery and a 55 g action cam on top, counted in its 715 g. It produces 15.2 N per motor. It hovers at about 26% throttle, like a real five-inch. It is the all-rounder, and everything else is tuned against it.</p>
+          <p><strong>Bolt</strong> is the racer: 2207 2050 KV motors on 6S 1100, no action cam. It is the fastest of the six, and its motors respond in 26 ms, against 30 ms on Strider. The camera has 35° of uptilt. It is also the least forgiving.</p>
+          <p><strong>Dome</strong> is a three-inch cinewhoop with ducted 1804 2450 KV motors on 4S. The ducts change everything: an impact up to 9 m/s only bumps it, and it bounces off walls instead of crashing. It feels planted. The camera has only 10° of uptilt.</p>
+          <p><strong>Pip</strong> weighs 32 g: 0702 25,000 KV motors, 31 mm props, a 1S 300 mAh battery. It is floaty and survives hits up to 12 m/s, so it is close to unbreakable. It is made for indoors.</p>
+          <p><strong>Needle</strong> is a three-inch toothpick at 130 g, with 1404 3800 KV motors on 4S 450. It is light and twitchy. It threads the gaps in Toy Town and City, but every wall bites.</p>
+          <p><strong>Condor</strong> is the long-range seven-inch: 2807 1300 KV motors, 7-inch props, 6S 1800 and a GPS mast, at 1.15 kg. It is heavy and smooth and slow to turn. Its motors respond in 45 ms going up and 65 ms coming down, and it has a long glide. It flies for close to ten minutes on a pack.</p>
+          <figure><img src="/img/drone-classes-dome-pip-condor-1600.jpg" width="1600" height="326" alt="Three drones on lit pads in the hangar: Dome with pink ducts, Pip with dark ducts, and Condor with long props and a GPS mast" loading="lazy" /><figcaption>Dome, Pip and Condor in the hangar.</figcaption></figure>
+
+          <h2>One controller for all six</h2>
+          <p>The easy way to make drones feel different is to give each one its own flight controller tune. We did the opposite. Every class should track the stick the same way, so the differences you feel come from the airframe and not from a hidden setting.</p>
+          <p>Two things make that work. First, inertia scales with mass times arm length squared, so a big heavy quad is much harder to rotate than a small light one, just like a real one. Second, the rate PID gains are rescaled for each airframe by its torque authority, how much turning force its motors can make for its size. That way the rate you ask for is the rate you get on every class. How quickly it gets there still depends on mass and motor lag, which is why Condor feels slow to turn.</p>
+          <p>So what changes between classes is mass, punch, drag and motor lag. Not the controller.</p>
+          <p>The stick rates are the same on every class too. They use Actual rates:</p>
+          <ul>
+            <li><strong>Beginner:</strong> 50 deg/s centre rate, 400 deg/s max, yaw max 180 deg/s.</li>
+            <li><strong>Intermediate:</strong> 120 deg/s centre rate, 560 deg/s max, yaw max 340 deg/s.</li>
+            <li><strong>Pro:</strong> 200 deg/s centre rate, 670 deg/s max.</li>
+          </ul>
+          <p>At 30% stick that gives 31, 58 and 80 deg/s. If those terms are new, our post on <a href="/devlog/rates-and-expo-explained/">rates and expo</a> explains them. The point here: pick a rate preset once, and it means the same on every drone. Switch from Strider to Condor and the same stick asks for the same rotation.</p>
+
+          <h2>Also this week</h2>
+          <ul>
+            <li><strong>Game stick mode.</strong> A new default stick mode called Game, on touch, gamepad, keyboard and the AirPlay pad.</li>
+            <li><strong>Flip buttons.</strong> Now in every mode.</li>
+            <li><strong>Chase camera.</strong> It aims down the flight path and holds still through flips.</li>
+            <li><strong>Android.</strong> Large screens rotate freely, and budget GPUs start at Low quality.</li>
+          </ul>
+          <p>Start with Strider or Dome, and unlock the other four through their quests at <a href="https://dronesim.coworkgamestudio.com/play/">dronesim.coworkgamestudio.com/play/</a>.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/designing-gps-mode/">Designing GPS mode: flying in the first minute</a></li><li><a href="/games/drone-sim/drones/">The six drones of Drone Sim</a></li><li><a href="/devlog/rates-and-expo-explained/">Rates and expo explained</a></li><li><a href="/devlog/a-1khz-flight-model-in-a-browser-tab/">A 1 kHz flight model in a browser tab</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED, an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED. All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>

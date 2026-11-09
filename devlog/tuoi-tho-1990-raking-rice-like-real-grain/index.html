@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Tuổi Thơ 1990: raking rice like real grain · Cowork Game Studio</title>
+    <meta name="description" content="A follow-up on chapter 4 of Tuổi Thơ 1990: rice that moves only under the rake, a girl who rakes in passes, a calmer walk back with the empty sack, a new music score and a tidier yard." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/tuoi-tho-1990-raking-rice-like-real-grain/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Tuổi Thơ 1990: raking rice like real grain · Cowork Game Studio" />
+    <meta property="og:description" content="A follow-up on chapter 4 of Tuổi Thơ 1990: rice that moves only under the rake, a girl who rakes in passes, a calmer walk back with the empty sack, a new music score and a tidier yard." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/tuoi-tho-1990-raking-rice-like-real-grain/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/tuoi-tho-1990-ch4-rake-half-1600.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Tuổi Thơ 1990: raking rice like real grain", "description": "A follow-up on chapter 4 of Tuổi Thơ 1990: rice that moves only under the rake, a girl who rakes in passes, a calmer walk back with the empty sack, a new music score and a tidier yard.", "datePublished": "2026-11-09", "image": "https://coworkgamestudio.com/img/tuoi-tho-1990-ch4-rake-half-1600.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/tuoi-tho-1990-raking-rice-like-real-grain/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Tuổi Thơ 1990: raking rice like real grain</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-09">9 November 2026</time> · Tuổi Thơ 1990</p>
+          <figure><img src="/img/tuoi-tho-1990-ch4-rake-half-1600.jpg" width="1600" height="900" alt="Seen from above, the girl rakes a heap of rice out across her drying patch, half of it already spread thin" fetchpriority="high" /></figure>
+          <p>Hi everyone,</p>
+          <p>A short follow-up on chapter 4 of <strong>Tuổi Thơ 1990</strong>, the chapter about drying the rice harvest in the yard. The <a href="/devlog/tuoi-tho-1990-rice-drying-wip/">last post</a> covered how the chores work and the rain round. This one is about the raking itself, the walk back with the empty sack, a tidier yard and new music. All of it is work in progress.</p>
+
+          <h2>Rice that behaves like grain</h2>
+          <p>The girl pours a sack out onto her patch of the yard, and the rice lands in a heap. Then she has to rake it out thin so it can dry.</p>
+          <figure><img src="/img/tuoi-tho-1990-ch4-pour-heap-1600.jpg" width="1600" height="900" alt="Seen from above, the girl tips an empty white sack over a heap of rice she has just poured" loading="lazy" /><figcaption>Work in progress: the poured heap, before any raking.</figcaption></figure>
+          <p>The rice now moves only where the teeth of the rake pass. Nothing moves on its own while you rake. Only at the very end, once the patch is even, do the last ridges settle flat over half a second. And the total amount of rice is kept: the rake moves rice from one place to another, it never adds any and never loses any. The heap you pour is exactly the rice you spread.</p>
+          <p>Underneath, the yard is still the thickness map from the last post: a grid of 2 cm squares, each storing how much rice sits on it. A stroke works the squares the teeth pass over. Where a square has more rice than the even layer, the rake picks some up. Where a square has less, the rake lays rice down until it reaches the layer. The rake holds only so much at once, and nothing is laid where the rake is carrying nothing. You can watch it happen from the game camera: the rake leaves rows in the rice, and bare ground shows through where the heap used to be.</p>
+          <p>We measured this in a test run last week, before the final change to the rake. The heap started as a pile 17 cm tall. After raking it was an even layer of about 4 to 6 mm over the whole drying patch. Across 29 strokes, the total volume of rice drifted by 0.0000%.</p>
+          <p>The girl also rakes in passes now. She does not stand in one spot and sweep around herself. She walks along the rows her own rake leaves behind, one pass after another. The progress meter starts at 0% and fills up as more of the ground gets covered.</p>
+          <figure><img src="/img/tuoi-tho-1990-ch4-rake-even-1600.jpg" width="1600" height="900" alt="The girl stands in the middle of her drying patch, now covered edge to edge with an even layer of rice showing rake marks" loading="lazy" /><figcaption>Work in progress: the patch raked even, rake marks and all.</figcaption></figure>
+
+          <h2>The walk back</h2>
+          <p>Once the sack is empty, she carries it back. This short walk got some care too. She turns on her planted foot, so her feet do not slide over the ground. We measure foot sliding on this turn, and it is now zero. She walks around the rice heaps instead of through them. And she ends on her own spot on the porch.</p>
+          <p>The yard is tidier now as well. Twigs and rubbish go onto a rubbish heap. Mom walks at her own pace into each place where she sets something down, instead of jumping speed to get there.</p>
+
+          <h2>Music</h2>
+          <p>The game has a new music score. When the scene changes, the music crossfades into the next piece instead of cutting. And when someone speaks, the music drops down underneath so you can hear them.</p>
+          <p>Next we keep going through chapter 4. We will post again when there is more to show.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/tuoi-tho-1990-rice-drying-wip/">Tuổi Thơ 1990: drying the rice, work in progress</a></li><li><a href="/games/">All our games</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED, an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED. All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
