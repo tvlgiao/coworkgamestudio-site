@@ -177,3 +177,5 @@ article.wrap { padding-top: 48px; }
 .st-note { margin-top: 10px; font-size: .9rem; color: var(--muted); }
 .prose video { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
 .prose video.vertical { max-width: 360px; margin-left: auto; margin-right: auto; }
+.game-card + .game-card { margin-top: 24px; }
+.badge-new { display: inline-block; margin-left: 10px; padding: 3px 9px; font-family: Inter, system-ui, sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #05070d; background: #ffc24a; border-radius: 999px; vertical-align: middle; }
