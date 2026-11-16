@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9013562180922911" />
+    <title>Drone Sim on Quest 2: a steady 72 fps on all 8 tracks · Cowork Game Studio</title>
+    <meta name="description" content="How we got Drone Simulator: FPV Racing to hold about 72 frames per second on Quest 2 on every track: a tuned VR resolution, lighter VR scenery and less work for the CPU each frame." />
+    <link rel="canonical" href="https://coworkgamestudio.com/devlog/drone-sim-quest-2-holds-72-fps/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#05070d" />
+    <meta property="og:site_name" content="Cowork Game Studio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Drone Sim on Quest 2: a steady 72 fps on all 8 tracks · Cowork Game Studio" />
+    <meta property="og:description" content="How we got Drone Simulator: FPV Racing to hold about 72 frames per second on Quest 2 on every track: a tuned VR resolution, lighter VR scenery and less work for the CPU each frame." />
+    <meta property="og:url" content="https://coworkgamestudio.com/devlog/drone-sim-quest-2-holds-72-fps/" />
+    <meta property="og:image" content="https://coworkgamestudio.com/img/drone-sim-quest2-72fps-1600.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Drone Sim on Quest 2: a steady 72 fps on all 8 tracks", "description": "How we got Drone Simulator: FPV Racing to hold about 72 frames per second on Quest 2 on every track: a tuned VR resolution, lighter VR scenery and less work for the CPU each frame.", "datePublished": "2026-11-16", "image": "https://coworkgamestudio.com/img/drone-sim-quest2-72fps-1600.jpg", "author": {"@type": "Organization", "name": "Cowork Game Studio", "url": "https://coworkgamestudio.com/"}, "publisher": {"@type": "Organization", "name": "COWORK COMPANY LIMITED", "url": "https://coworkgamestudio.com/"}, "mainEntityOfPage": "https://coworkgamestudio.com/devlog/drone-sim-quest-2-holds-72-fps/"}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Cowork Game Studio home"><img src="/favicon.svg" alt="" width="34" height="34" />Cowork <span>Game</span> Studio</a>
+        <nav class="site-nav" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/games/">Games</a></li><li><a href="/devlog/" aria-current="page">Devlog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="wrap">
+        <div class="prose">
+          <p class="breadcrumb"><a href="/devlog/">Devlog</a> / Devlog</p>
+          <h1>Drone Sim on Quest 2: a steady 72 fps on all 8 tracks</h1>
+          <p class="meta">By Cowork Game Studio · Published <time datetime="2026-11-16">16 November 2026</time> · Drone Sim</p>
+          <figure><img src="/img/drone-sim-quest2-72fps-1600.jpg" width="1600" height="900" alt="First-person view in a Quest headset inside an indoor loft track, with glowing rings and a small flight panel showing speed and mode" fetchpriority="high" /></figure>
+          <p>Hi everyone,</p>
+          <p>This week was about one thing on Meta Quest: frame rate. In VR a dropped frame is not just a stutter, you feel it. Quest 2 refreshes 72 times a second, so that is the number the game has to hit every frame, on every track. It now holds about 72 fps on Quest 2 on all 8 tracks.</p>
+          <p>The picture above is from the headset, with the small flight panel that floats in front of you.</p>
+
+          <h2>A tuned VR resolution</h2>
+          <p>The headset now renders the VR view at a resolution tuned for Quest 2, so the graphics chip is not pushed past what it can draw in time.</p>
+
+          <h2>Lighter scenery, only in VR</h2>
+          <p>Ha Long, Alpine, Night Loft, Training, City and Infinite now load a lighter set of scenery when you play in VR. The tracks, rings and gates are the same as on every other platform. What changes is the background detail you fly past at speed. On a phone or in a browser nothing changes.</p>
+
+          <h2>Less work for the CPU</h2>
+          <p>Some of the savings come from doing less each frame, and they help on every platform, not only Quest.</p>
+          <ul>
+            <li><strong>Scenery that never moves</strong> is no longer recalculated every frame.</li>
+            <li><strong>Race gates</strong> are sent to the graphics card again only when something about them changes.</li>
+            <li><strong>The in-headset flight panel</strong> redraws about 5 times a second instead of every frame.</li>
+          </ul>
+
+          <p>Next we keep testing on the headset. If you fly on Quest and a track feels rough, tell us which one at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p>
+          <p>Drone Sim is free to try on Meta Quest, and free on iPhone, iPad and in your browser. Everything is on the <a href="/games/drone-sim/">Drone Sim page</a>.</p>
+
+          <div class="note"><p>Have a question about this article or found something that does not match the game? Write to us at <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a>.</p></div>
+          <h2>More from the devlog</h2><ul><li><a href="/devlog/drone-classes-six-airframes-one-controller/">Drone classes: six airframes, one controller</a></li><li><a href="/devlog/a-1khz-flight-model-in-a-browser-tab/">A 1 kHz flight model in a browser tab</a></li><li><a href="/games/drone-sim/">Drone Sim</a></li></ul>
+        </div>
+      </article>
+      <div class="wrap">
+        <section class="cta">
+          <h2>Ready to fly?</h2>
+          <p class="muted">Drone Sim runs in the browser on a computer, phone or tablet. No download, no sign-up.</p>
+          <div class="btns"><a class="btn btn-primary" href="https://dronesim.coworkgamestudio.com/play/">Play Drone Sim free</a><a class="btn btn-ghost" href="/games/drone-sim/">Read the game guide</a></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h2>Cowork Game Studio</h2>
+            <p>The games label of COWORK COMPANY LIMITED, an independent studio in Ho Chi Minh City, Viet Nam.</p>
+            <address>Ho Chi Minh City, Viet Nam<br />
+              Email: <a href="mailto:support@coworkgamestudio.com">support@coworkgamestudio.com</a></address>
+          </div>
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/games/">Games</a></li>
+              <li><a href="/games/drone-sim/">Drone Sim</a></li>
+              <li><a href="/devlog/">Devlog</a></li>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="copy">© 2026 COWORK COMPANY LIMITED. All rights reserved. Drone Sim is a game by Cowork Game Studio.</p>
+      </div>
+    </footer>
+  </body>
+</html>
